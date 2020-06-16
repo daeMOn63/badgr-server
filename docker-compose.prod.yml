@@ -23,6 +23,7 @@ services:
 
   # this container runs nginx (webserver) and uses the uwsgi app.sock file from prod_api via a volume
   nginx:
+    container_name: badgr-server
     build:
       context: .
       dockerfile: .docker/Dockerfile.nginx
@@ -31,8 +32,8 @@ services:
       - badgr_server_api_mediafiles:/badgr_server/mediafiles
     depends_on:
       - "api"
-    ports:
-      - "8080:80"
+    expose:
+      - "80"
 
 volumes:
   badgr_server_api_staticfiles:
